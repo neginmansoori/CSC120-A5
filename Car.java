@@ -5,7 +5,8 @@ public class Car {
     private ArrayList<Passenger> passengers_onboard;
     private int max_capacity;
     public int order_number;
-
+    
+    // constructor
     public Car(int max_capacity, int order_number){
         this.max_capacity = max_capacity;
         this.passengers_onboard = new ArrayList<Passenger>();

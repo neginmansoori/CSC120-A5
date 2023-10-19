@@ -4,6 +4,7 @@ public class Train {
     private final Engine engine;
     private ArrayList<Car> Cars;
 
+    // constructor
     public Train(FuelType fuel, double max_fuel_level, double nCars, int max_capacity, int order_number){
         this.engine = new Engine (fuel, max_fuel_level);
         for (int i=0; i<nCars; i++){
