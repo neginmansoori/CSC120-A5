@@ -4,17 +4,18 @@ import javax.management.RuntimeErrorException;
 public class Car {
 
     /**
-     * Attributes:
      * ARRAYLIST<Passenger>: the arralist of Passengers on a given car
-     * int max-_capacity: max capacity of the car
      */
     private ArrayList<Passenger> passengers_onboard;
+    /**
+     * int max-_capacity: max capacity of the car
+     */
     private int max_capacity;
     
     // constructor
     public Car(int max_capacity){
         this.max_capacity = max_capacity;
-        this.passengers_onboard = new ArrayList<Passenger>();
+        this.passengers_onboard = new ArrayList<Passenger>(max_capacity);
     }
     
     /** checks the seats available in the car
@@ -38,11 +39,10 @@ public class Car {
     /**
     * adds passenger to the arraylist of passengers on borad
     * @param passenger
-    * @return void
     */
     public void addPassenger(Passenger passenger){
          if (this.passengers_onboard.contains(passenger)){
-            throw new RuntimeException(passenger.name+ " is already on the car.");
+            throw new RuntimeException(passenger.getName()+ " is already on the car.");
         }
          if (this.seatsRemaining() == 0){
             throw new RuntimeErrorException(null, "This car is already full");
@@ -53,26 +53,27 @@ public class Car {
     /**
     * removes passenger from arraylist of passengers on board
     * @param passenger
-    * @return void
     */
     public void removePassenger(Passenger passenger){
         if (!this.passengers_onboard.contains(passenger)){
-            throw new RuntimeException(passenger.name+ " is not on the car.");
+            throw new RuntimeException(passenger.getName()+ " is not on the car.");
     }
-    this.passengers_onboard.remove(passenger);
+        this.passengers_onboard.remove(passenger);
     }
 
     /**
     * prints the arraylist of passengers on board
-    * @param void
-    * @return void
     */
     public void printManifest(){
         if (this.passengers_onboard.isEmpty()){
            System.out.println("This car is empty");
          }
-        //System.out.println(this.passengers_onboard);
-        System.out.println(this.passengers_onboard.listIterator());
+
+        else{
+            for (Passenger p: this.passengers_onboard){ //for p in the arraylist
+                System.out.println("- " + p.getName());
+            }
+         }
     }
 
     public static void main(String[] args) {

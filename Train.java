@@ -2,79 +2,76 @@ import java.util.ArrayList;
 
 public class Train {
     /**
-     * Attributes:
-     * - A final instance of the Engine class
-     * - An arraylist of the cars the train consists of
-     */
+    * A final instance of the Engine class
+    */
     private final Engine engine;
-    private ArrayList<Car> Cars;
+    /**
+    * An arraylist of the cars the train consists of
+    */
+    private ArrayList<Car> cars;
 
     // constructor
     public Train(FuelType fuel, double max_fuel_level, int nCars, int passenger_capacity){
         this.engine = new Engine (fuel, max_fuel_level);
-        this.Cars = new ArrayList<Car> (nCars);
+        this.cars = new ArrayList<Car> (nCars);
         for (int i=0; i<nCars; i++){
-            Car car = new Car(passenger_capacity); //results in double the capacity
-            this.Cars.add(car);
+            Car car = new Car(passenger_capacity);
+            this.cars.add(car);
         }
     }
-/**
- * returns engine properties
- * @return the instance of the engine
- */
+    /**
+    * Engine accessor
+    * @return the instance of the engine
+    */
     public Engine getEngine(){
         return this.engine;
     }
-/**
- * Returns the i-th car in the Train
- * @return car number i in the train's cars list
- */
+    /**
+    * Accessor for the i-th car in the Train
+    * @return car number i in the train's cars list
+    */
     public Car getCar(int i){
-        return this.Cars.get(i);
+        return this.cars.get(i);
     }
-
-    public static void main(String[] args) {
-        Train newTrain = new Train(FuelType.OTHER, 100, 2, 80);
-        System.out.println("Here are the properties of the engine of this train: " + newTrain.getEngine());
-        System.out.println("Here is the train capcity: " + newTrain.getMaxCapacity());
-    }
-/**
- * prints train's max capacity
- * @return int max capacity
- */
+    /**
+    * prints train's max capacity
+    * @return int max capacity
+    */
     public int getMaxCapacity(){
         int max_capacity = 0;
-        for (int i=0 ; i< Cars.size(); i++ ){
-            max_capacity += Cars.get(i).getCapacity();
+        for (int i=0 ; i< cars.size(); i++ ){
+            max_capacity += cars.get(i).getCapacity();
         }
         return max_capacity;
     }
-/**
- * prints the number of vacant seats on train
- * @return int: number of vacant seats
- */
+    /**
+    * prints the number of vacant seats on train
+    * @return int: number of vacant seats
+    */
     public int seatsRemaining(){
         int remainingSeats = 0;
-        try{
-            for (int i=0 ; i< Cars.size(); i++ ){
-            remainingSeats += Cars.get(i).seatsRemaining();
+        for (int i=0 ; i< cars.size(); i++ ){
+            remainingSeats += cars.get(i).seatsRemaining();
          }
-        }
-        catch(IndexOutOfBoundsException e){
-            System.out.println(e.getMessage());
-        } //catching?
-
         return remainingSeats;
     }
-//Q: if two methods with the same name but for different classes, can it distinguish between the classes?
-/**
- * prints the arraylist of passengers on board on all cars combined
- * @return arraylist
- */
+    /**
+    * prints the name of the passengers with the number of the board they have boarded
+    */
     public void printManifest(){
-        for (int i=0 ; i< Cars.size(); i++ ){
-            Cars.get(i).printManifest();
+        for (int i=0 ; i< cars.size(); i++ ){
+            System.out.println("Printing the manifest for car number " + (i+1) +":");
+            cars.get(i).printManifest();
         }
+    }
+    
+    public static void main(String[] args) {
+    Train newTrain = new Train(FuelType.OTHER, 100, 2, 80);
+    System.out.println("Here are the properties of the engine of this train: " + newTrain.getEngine());
+    System.out.println("Here is the train capcity: " + newTrain.getMaxCapacity());
+    Passenger negin = new Passenger("Negin");
+    negin.boardCar(newTrain.getCar(1));
+    newTrain.printManifest();
     }
 }
 

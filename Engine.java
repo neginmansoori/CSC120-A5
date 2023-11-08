@@ -1,11 +1,16 @@
 public class Engine {
 
     /**
-     * Attributes: FuelType can be either of the following: STEAM, INTERNAL_COMBUSTION, ELECTRIC, OTHER;
-     * double fuel_level: the 
+     * FuelType can be either of the following: STEAM, INTERNAL_COMBUSTION, ELECTRIC, OTHER
      */
     private FuelType fuel;
+    /**
+     * fuel_level is the remaining fuel level of the engine
+     */
     private double fuel_level; // how to set a restriction for value here?
+    /**
+     * max_fuel_level is maximum fuel level of the engine
+     * */
     private double max_fuel_level;
 
     // constructor
@@ -15,21 +20,18 @@ public class Engine {
         this.max_fuel_level = max_fuel_level;
     }
 
-/**
- * sets the current fuel level to the maximum
- * @param fuel_level
- * @param max_fuel_level
- */
-    public void refuel(double fuel_level, double max_fuel_level){
+    /**
+     * sets the current fuel level to the maximum
+     */
+    public void refuel(){
         this.fuel_level = this.max_fuel_level;
     }
 
-/**
- * asks how much feul is needed to travel, and reduces the amount from the fuel level if possible.
- * if not, returns an exception
- * @param int distance
- * @return void
- */
+    /**
+     * asks how much feul is needed to travel, and reduces the amount from the fuel level if possible.
+     * if not, returns an exception
+     * @param int distance
+     */
     public void go(int distance){
          this.fuel_level -= distance;
          if (this.fuel_level <0){
@@ -41,7 +43,6 @@ public class Engine {
             System.out.println("You have" + this.fuel_level + " kg fuel left.");
          }
     }
-
         
     public static void main(String[] args) {
         Engine myEngine = new Engine(FuelType.ELECTRIC, 100.0);
