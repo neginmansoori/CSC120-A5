@@ -1,7 +1,12 @@
 public class Engine {
+
+    /**
+     * Attributes: FuelType can be either of the following: STEAM, INTERNAL_COMBUSTION, ELECTRIC, OTHER;
+     * double fuel_level: the 
+     */
     private FuelType fuel;
     private double fuel_level; // how to set a restriction for value here?
-    double max_fuel_level;
+    private double max_fuel_level;
 
     // constructor
     public Engine(FuelType fuel, double max_fuel_level){
@@ -28,8 +33,8 @@ public class Engine {
     public void go(int distance){
          this.fuel_level -= distance;
          if (this.fuel_level <0){
-            System.out.println("You don't have enough fuel to travel."); // how to turn this into exception?
             this.fuel_level += distance; //resetting fuel to previous value
+            throw new RuntimeException("You don't have enough fuel to travel.");
          }
 
          else{
@@ -41,7 +46,7 @@ public class Engine {
     public static void main(String[] args) {
         Engine myEngine = new Engine(FuelType.ELECTRIC, 100.0);
         try {
-            while (true) {
+            if (true) {
                 myEngine.go(120);
             }
         } catch (Exception e) {
